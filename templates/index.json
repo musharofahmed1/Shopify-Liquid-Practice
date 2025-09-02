@@ -10,7 +10,7 @@
 {
   "sections": {
     "main": {
-      "type": "basics",
+      "type": "hello-world",
       "settings": {}
     }
   },

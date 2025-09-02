@@ -15,24 +15,34 @@
  {% assign  koo = true %}
 
 <p>The Value of foo {{foo}}</p>
-<p>The Value of koo {{koo}}</p>
+<p>The Value of koo {{koo}} </p>
+<p><br></p>
+
+<h4>Array</h4>
 
 {% assign numbers_string = "1,2,3,4,5,6,7,8,9,10" %}
 {% assign number = numbers_string | split: "," %}
 
 <p>Numbers Are: </p>
+<ul>
 {% for num in number %}
-  <p>{{ num }} <br></p>
+<li>{{ num }}</li>
 {% endfor %}
+</ul>
 
-<h4>Operators</h4>
-{% if product.title == "Awesome Shoes" %}
-    These Shoes are awesome!
-{% endif %}
+<p>Names Are: </p>
+{% assign names_string = "Musa,Mahid,Mahbub,Monower" %}
+{% assign names = names_string | split: "," %}
 
-{% if product.title != "Awesome Shoes" %}
-    These Shoes are average!
-{% endif %}
+<ul>
+    {% for name in names %}
+        <li>{{name}}</li>
+    {% endfor %}
+</ul>
+
+<p><br></p>
+
+
 
 {%  style  %}  
     .center-text {
