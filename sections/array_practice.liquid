@@ -1,0 +1,65 @@
+<h3 class="center-text">Hello From Array Practice</h3>
+
+<!--Compact-->
+<div>
+<h4>Compact</h4>
+
+{%  assign numbers =  "23,21,,43,21,,34,,77" %} 
+{%  assign num_array = numbers |  split: "," %} 
+<ul>
+    {% for number in num_array %}
+        <li>{{number}}</li>
+    {% endfor %}
+</ul> 
+<p>compacted_numbers</p>
+
+{%  assign compacted_numbers = num_array | compact %} 
+
+<ul>
+    {% for number in compacted_numbers %}
+        <li>{{number}}</li>
+    {% endfor %}
+</ul>
+
+</div>
+
+<!--Concat-->
+{% assign fruits_one = "apple,banana,mango" | split: "," %}
+{% assign fruits_two = "orange,grape" | split: "," %}
+
+<h4>Fruits One:</h4>
+<ul>
+  {% for fruit in fruits_one %}
+    <li>{{ fruit }}</li>
+  {% endfor %}
+</ul>
+
+<h4>Fruits Two:</h4>
+<ul>
+  {% for fruit in fruits_two %}
+    <li>{{ fruit }}</li>
+  {% endfor %}
+</ul>
+
+{% assign all_fruits = fruits_one | concat: fruits_two %}
+
+<h4>All Fruits (Concatenated):</h4>
+<ul>
+  {% for fruit in all_fruits %}
+    <li>{{ fruit }}</li>
+  {% endfor %}
+</ul>
+
+<!--map -->
+<!--Array map Shopify Liquid এ mainly use হয় কোনো array (list) থেকে এক 
+particular property/field আলাদা করে বের করার জন্য।-->
+
+{%- assign product_titles = collection.products | map: 'title' -%}
+
+{{ product_titles | join: ', ' }}
+
+{%  style  %}  
+    .center-text {
+        text-align: center
+    }
+{% endstyle %}

@@ -1,0 +1,65 @@
+<h2 class="center-text">Hello From Product</h2>
+<h3>Operator</h3>
+<p><br></p>
+{% assign price  = 50 %} 
+{% assign product_title = product.title %} 
+{% assign tags = "new,hot,discount" |  split: "," %}
+
+<!-- Equal -->
+{% if product_title == "Awesome Shoes" %}
+  <p>Title is exactly Awesome Shoes <br></p>
+{% endif %}
+
+<!-- Not equal -->
+{% if product_title != "Awesome Shoes" %}
+  <p>There is NOT Awesome Shoes <br></p>
+{% endif %}
+
+<!-- Greater than -->
+
+{% if price > 50 %}
+  <p>The Price is Greater Than 50 <br> </p>
+{% endif %}
+
+<!-- Less than -->
+
+{% if price < 50 %}
+  <p>The Price is Less than 50 <br></p>
+{% endif %}
+
+<!-- Greater than or equal -->
+
+{% if price >= 50 %}
+  <p> Price is greater than or equal to 50<br></p>
+{% endif %}
+
+<!-- Less than or equal -->
+{% if price <= 50 %}
+   <p> Price is less than or equal to 50<br></p>
+{% endif %}
+
+<!-- Contains (string or array) -->
+{% if product.title contains "Shoes" %}
+  <p> Title contains "Shoes"<br></p>
+{% endif %}
+
+{% if tags contains "hot" %}
+  <p>Tags contain "hot"<br></p>
+{% endif %}
+
+<!-- AND -->
+{% if price > 30 and product_title == "Awesome Shoes" %}
+  <p>Both conditions true (price > 30 AND title is Awesome Shoes)<br></p>
+{% endif %}
+
+
+<!-- OR -->
+{% if price > 100 or product_title == "Awesome Shoes" %}
+  <p>At least one condition true (price > 100 OR title is Awesome Shoes)<br></p>
+{% endif %}
+
+{%  style  %}  
+    .center-text {
+        text-align: center
+    }
+{% endstyle %}

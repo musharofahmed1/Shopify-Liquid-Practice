@@ -1,0 +1,52 @@
+<h2 class="center-text"> <br> Hello From Tags Practice</h2>
+
+{% form 'contact' %}
+
+<h2>Contact Us</h2>
+
+<!-- Name -->
+<div>
+  <label for="contact-name">Name:</label>
+  <input type="text" id="contact-name" name="contact[name]" required>
+</div>
+
+<br>
+
+<!-- Email -->
+<div>
+  <label for="contact-email">Email:</label>
+  <input type="email" id="contact-email" name="contact[email]" required>
+</div>
+
+<br>
+
+<!-- Phone (optional) -->
+<div>
+  <label for="contact-phone">Phone:</label>
+  <input type="tel" id="contact-phone" name="contact[phone]">
+</div>
+
+<br>
+
+<!-- Message -->
+<div>
+  <label for="contact-message">Message:</label><br>
+  <textarea id="contact-message" name="contact[body]" rows="5" required></textarea>
+</div>
+
+<br>
+
+<!-- Submit button -->
+<div>
+  <input type="submit" value="Send Message">
+</div>
+
+{% endform %}
+
+
+
+{%  style  %}  
+    .center-text {
+        text-align: center
+    }
+{% endstyle %}
