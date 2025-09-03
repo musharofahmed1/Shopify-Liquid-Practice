@@ -1,4 +1,39 @@
-<h1>Iteration</h1>
+{% comment %} <h1>Iteration</h1>
 {% for item in collections.all.products %}
    <p> {{ item.title }} </p>
+{% endfor %} {% endcomment %}
+
+ <!--default-->
+ <div>
+   <h4>Default</h4>
+{{ product.selected_variant.url | default: product.url }} 
+
+ <!--allow-false-->
+ {%  assign display_price = "" %} 
+ {{ display_price |  default: false, allow_false: true }}
+
+ {%  assign display_price = true %} 
+ {{ display_price |  default: false, allow_false: true }}
+ </div>
+
+  <!--default Pagination-->
+<div>
+   {%  paginate collection.products by 2 %} 
+{% for product in collection.products %}
+   {{ product.title }}
 {% endfor %}
+
+{{- paginate |  default_pagination -}}
+{% endpaginate %} 
+</div>
+
+<!--Unit Price With Measurement-->
+<h4>Unit Price With Measurement</h4>
+{% assign variant = product.variants.first %}
+{{ variant.unit_price | unit_price_with_measurement: variant.unit_price_measurement }}
+
+
+<!--All Product Object-->
+<h4>All Product Object</h4>
+
+{{ all_products['Casual Wear'].title }}

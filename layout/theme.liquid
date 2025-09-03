@@ -15,9 +15,152 @@
 
   <body>
     {% sections 'header-group' %}
+    
     {{ content_for_layout }}
     
-   
+    <!--Cart-->
+    <!--Item Count For Variant-->
+    <h4>Item Count For Variant</h4>
+    {{ cart |  item_count_for_variant: 10088651030847 }}
+  
+    <!--Line Items For-->
+    <!--Product-->
+    <h4>Line Items For : Product</h4>
+    {%  assign product = all_products['Classic Denim Jeans'] %} 
+    {%  assign line_items = cart |  line_items_for: product %}
+
+    Total cart quantity for product : {{ line_items | sum : 'quantity'}}
+
+    <!--Variant-->
+    <h4>Line Items For : Variant</h4>
+    {%  assign product = all_products['Classic Denim Jeans'] %}
+    {% assign variant = product.variants.first %}
+    {% assign line_items = cart |  line_items_for: variant %}
+
+    Total cart quantity for variant : {{ line_items | sum: 'quantity' }}
+    
+    <!--Collection-->
+    <!--Highlight Activity Log: Collection page এ কোন tag currently active 
+    তা visually show করতে।-->
+    <h4>Highlight Activity Log</h4>
+    {% for tag in collection.all_tags %}
+     <p>{{ tag |  highlight_active_tag |  link_to_tag: tag }}</p>
+    {% endfor %}
+
+    <!--link_to_type: কোনো product type কে link আকারে দেখানো।-->
+    <h4>Link to type</h4>
+    {{ 'Cloth' |  link_to_type}}
+    {{ 'Cloth' |  link_to_type : class : 'link-class'}}
+
+    <!--link_to_vendor: product vendor এর collection link বানায়।-->
+    <h4>Link To Vendor</h4>
+    {{ "World Station Apparel" |  link_to_vendor }}
+    {{ "World Station Apparel" |  link_to_vendor : class : 'link-class' }}
+
+    <!--sort_by: এটি মূলত collection.products কে sort করার জন্য ব্যবহৃত হয়।-->
+    {{ collection.url | sort_by: 'best-selling' }}
+    {% comment %} 
+    {{ collection.url | sort_by: 'title-ascending' }}
+    {{ collection.url | sort_by: 'title-descending' }} 
+    {% endcomment %}
+
+    <!--url_for_type: কোন product type এর collection page URL বের করতে।-->
+    <br>
+    {{ 'health' |  url_for_type }}
+    <!--url_for_vendor: কোন vendor এর collection page URL বের করতে--> 
+    <br>
+    {{ 'Summer Breeze Cotton Shirt' | url_for_vendor }}
+
+    <!--within: একটি collection এর products মধ্যে থেকে filter করতে--> 
+    <br>
+    {% comment %} 
+    {%  assign collection_product = collection.products.first %} 
+    {% collection_product.url | within: collection %} 
+    {% endcomment %}
+
+    <!--Color--> 
+    <!--brightness_difference--> 
+    <br>
+    {{ '#E800B0' |  brightness_difference: '#FECEE9' }}
+    
+    <!--avatar-->
+    {{ customer | avatar }} 
+
+    <!--customer_login_link-->
+    <br>
+    {{ 'Log in' |  customer_login_link }}
+
+    <!--customer_logout_link-->
+    <br>
+    {{ 'Log out' |  customer_logout_link }}
+
+    <!--customer_register_link-->
+    <br>
+    {{ 'Create an account' |  customer_register_link }}
+
+    <!--login_button-->
+    {{ shop |  login_button: action: 'follow'}}
+    
+    <!--font-face-->
+    {{settings.type_header_font |  font_face}}
+    
+    <!--Date-->
+    <h4>Date</h4>
+    <!--Date -->
+    {{ article.created_at |  date: '%B %d, %Y' }} <!--No output-->
+
+    <!--Date Now-->
+    {{ 'now' |  date: '%B %d, %Y' }}
+    {{ 'now' |  date: format:'abbreviated_date' }} <!--No output-->
+
+    <h4>JSON</h4>
+    <!--Convert String, Object to JSON-->
+    {{ product | json }}
+    <!--HTML-->
+    <h4>HTML</h4>
+    {{ settings.layout | class_list }} <!--No output-->
+
+    <!--link_to-->
+    {{ 'Shopify' |  link_to: 'https://www.shopify.com' }}
+    {{ 'Shopify' |  link_to: 'https://www.shopify.com', class:'link-class' }}
+
+    <!--Localization-->
+    <h4>Localization</h4>
+    <!--Currency Selector-->
+    {% form 'currency' %}
+      {{ form | currency_selector }}
+    {% endform %}
+
+    <!--Format Address-->
+    {{ shop.address |  format_address }}
+    {{ customer.default_address |  format_address }}  <!--No output-->
+
+     <!--Math-->
+     <h4>Math</h4>
+     <!--abs-->  
+     {{- 4 | abs -}}
+     <br> 
+     {{ 4 | at_least: 5 }}
+     <br>
+     {{ 4 | at_least: 3 }}
+     
+      <!--if additional_checkout_buttons-->  
+     {% if additional_checkout_buttons %}
+      {{content_for_additional_checkout_buttons}}
+     {% endif %}
+
+     <!--Address-->  
+     {
+      "address1": "Moglabazar",
+      "address2": "South Surma",
+      "city": "Sylhet",
+      "Company": "MS Global"
+     }
+
+     <!--All Country Option Tag-->  
+     <select name="country">
+      {{ all_country_option_tags }}
+     </select>
     {% sections 'footer-group' %}
   </body>
 </html>
